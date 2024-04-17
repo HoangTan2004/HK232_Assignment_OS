@@ -21,6 +21,6 @@
 
 ## Language and Tools
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/C_Programming_Language.svg/695px-C_Programming_Language.svg.png" alt="C" width="60"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEPqqlzdcl_8msnalRnJB4iWEx63Jk33II2jSpQRkRug&s" width="60"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsRNw0rZ38XM70CmZK8xnQBU6iuFoK2i72U98Z1ryP_Olx_Arj4p-w41VyBuSPBohCxW0&usqp=CAU" alt="VMWare" width="60">
+<img src="https://camo.githubusercontent.com/50bf2dc974c74fe4b45296db0bd278a9c3d4d635ab8e05a26c1baad8c9582a21/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f39362f3030303030302f632d70726f6772616d6d696e672e706e67" alt="C" width="70"> <img src="https://camo.githubusercontent.com/815c7db4f1e2df5d3aa63780e2643b286cee03945988edec1f96b0d927aad9f8/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f39362f3030303030302f6c696e75782d2d76312e706e67" width="70"> <img src="https://camo.githubusercontent.com/83f14e5c0d582219d08578b80c6a5202e0deade079d2485fc8e247f9c2faaeac/68747470733a2f2f696d672e69636f6e73382e636f6d2f666c75656e63792f39362f3030303030302f6f6c642d766d776172652d6c6f676f2e706e67" alt="VMWare" width="70">
 
 ## Report
