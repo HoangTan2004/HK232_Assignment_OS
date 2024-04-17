@@ -40,3 +40,10 @@
   - **Scheduling:** Vẽ sơ đồ Gantt mô tả cách CPU thực hiện các process.
   - **Memory:** Hiển thị trạng thái của trang được ánh xạ và trang chỉ mục liên quan đến thủ tục TLB và cách xử lý trường hợp xảy ra lỗi trang.
   - **Overall:** Sinh viên tự tim cách diễn giải kết quả mô phỏng.
+
+## Grading
+- Code (7 điểm)
+  - Scheduling: 3 điểm
+  - CPU MMU (phân trang và ánh xạ trực tiếp TLB đơn giản): 1.5 điểm
+  - Đầy đủ các operation CPU TLB: 1.5 điểm
+- Báo cáo (3 điểm)
