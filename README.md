@@ -27,3 +27,6 @@
   - `mem.c`: Triển khai RAM và Virtual Memory Engine.
   - `mm.c`, `mm-vm.c`, `mm-memphy.c`: Triển khai quản lý bộ nhớ dựa trên phân trang.
 
+## Requirments
+
+- **Định thời:** 
