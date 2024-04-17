@@ -32,3 +32,11 @@
 - **Định thời:** Triển khai bộ định thời dựa trên Multi-Level Queue (MLQ).
 - **Quản lý bộ nhớ:** Triển khai hệ thống con phân trang và focus vào module TLB.
 - **Câu hỏi:** Trả lời các câu hỏi được đưa ra trong phần Implementation. 
+
+## Report
+
+- Viết báo cáo trả lời từng câu hỏi ở từng phần trong Implementation.
+- Diễn giải kết quả chạy ở từng phần
+  - **Scheduling:** Vẽ sơ đồ Gantt mô tả cách CPU thực hiện các process.
+  - **Memory:** Hiển thị trạng thái của trang được ánh xạ và trang chỉ mục liên quan đến thủ tục TLB và cách xử lý trường hợp xảy ra lỗi trang.
+  - **Overall:** Sinh viên tự tim cách diễn giải kết quả mô phỏng.
