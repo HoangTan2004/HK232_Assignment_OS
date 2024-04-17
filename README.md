@@ -29,4 +29,6 @@
 
 ## Requirments
 
-- **Định thời:** 
+- **Định thời:** Triển khai bộ định thời dựa trên Multi-Level Queue (MLQ).
+- **Quản lý bộ nhớ:** Triển khai hệ thống con phân trang và focus vào module TLB.
+- **Câu hỏi:** Trả lời các câu hỏi được đưa ra trong phần Implementation. 
