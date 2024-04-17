@@ -1,26 +1,29 @@
 # <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/HCMCUT.svg" alt="HCMUT" width="23" /> Operating System: Assignment
 
-## Overview
+## Source code
 
-**Name:** Simple Operating System
+- Header file
 
-**Semester:** 232
+  - `timer.h`: Xác định bộ đếm thời gian cho toàn bộ hệ thống.
+  - `cpu.h`: Xác định các chức năng được sử dụng để triển khai CPU ảo.
+  - `queue.h`: Các hàm được sử dụng để triển khai hàng đợi chứa PCB của các tiến trình.
+  - `sched.h`: Xác định các chức năng được sử dụng bởi bộ định thời.
+  - `mem.h`: Các chức năng được Virtual Memory Engine sử dụng.
+  - `loader.h`: Các hàm được trình tải sử dụng để tải chương trình từ đĩa vào bộ nhớ
+  - `common.h`: Xác định các cấu trúc và hàm được sử dụng ở mọi nơi trong HĐH.
+  - `bitopts.h`: Xác định các thao tác trên dữ liệu bit.
+  - `os-mm.h`, `mm.h`: Xác định cấu trúc và dữ liệu cơ bản cho Quản lý bộ nhớ dựa trên phân trang.
+  - `os-cfg.h`: (Tùy chọn) Xác định các hằng số sử dụng để chuyển đổi cấu hình phần mềm.
 
-**Goal:** The objective of this assignment is the simulation of major components in a simple operating system, for example, scheduler, synchronization, related operations of physical memory and virtual memory.
+- Source file
 
-**Content:** In detail, student will practice with three major modules: scheduler, synchronization, mechanism of memory allocation from virtual-to-physical memory.
-- scheduler
-- synchronization
-- the operations of mem-allocation from virtual-to-physical
+  - `timer.c`: Thực hiện bộ đếm thời gian.
+  - `cpu.c`: Triển khai CPU ảo.
+  - `queue.c`: Thực hiện các thao tác trên hàng đợi (ưu tiên).
+  - `paging.c`: Sử dụng để kiểm tra chức năng của Virtual Memory Engine.
+  - `os.c`: Toàn bộ hệ điều hành bắt đầu chạy từ file này.
+  - `loader.c`: Triển khai trình tải.
+  - `sched.c`: Triển khai bộ định thời.
+  - `mem.c`: Triển khai RAM và Virtual Memory Engine.
+  - `mm.c`, `mm-vm.c`, `mm-memphy.c`: Triển khai quản lý bộ nhớ dựa trên phân trang.
 
-**Result:** After this assignment, student can understand partly the principle of a simple OS. They can understand and draw the role of OS key modules.
-
-## Requirments
-
-
-
-## Language and Tools
-
-<img src="https://camo.githubusercontent.com/50bf2dc974c74fe4b45296db0bd278a9c3d4d635ab8e05a26c1baad8c9582a21/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f39362f3030303030302f632d70726f6772616d6d696e672e706e67" alt="C" width="70"> <img src="https://camo.githubusercontent.com/815c7db4f1e2df5d3aa63780e2643b286cee03945988edec1f96b0d927aad9f8/68747470733a2f2f696d672e69636f6e73382e636f6d2f636f6c6f722f39362f3030303030302f6c696e75782d2d76312e706e67" width="70"> <img src="https://camo.githubusercontent.com/83f14e5c0d582219d08578b80c6a5202e0deade079d2485fc8e247f9c2faaeac/68747470733a2f2f696d672e69636f6e73382e636f6d2f666c75656e63792f39362f3030303030302f6f6c642d766d776172652d6c6f676f2e706e67" alt="VMWare" width="70">
-
-## Report
