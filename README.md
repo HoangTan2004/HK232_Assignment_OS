@@ -2,7 +2,7 @@
 
 ## Source code
 
-- Header file
+- **Header file**
 
   - `timer.h`: Xác định bộ đếm thời gian cho toàn bộ hệ thống.
   - `cpu.h`: Xác định các chức năng được sử dụng để triển khai CPU ảo.
@@ -15,7 +15,7 @@
   - `os-mm.h`, `mm.h`: Xác định cấu trúc và dữ liệu cơ bản cho Quản lý bộ nhớ dựa trên phân trang.
   - `os-cfg.h`: (Tùy chọn) Xác định các hằng số sử dụng để chuyển đổi cấu hình phần mềm.
 
-- Source file
+- **Source file**
 
   - `timer.c`: Thực hiện bộ đếm thời gian.
   - `cpu.c`: Triển khai CPU ảo.
@@ -27,7 +27,7 @@
   - `mem.c`: Triển khai RAM và Virtual Memory Engine.
   - `mm.c`, `mm-vm.c`, `mm-memphy.c`: Triển khai quản lý bộ nhớ dựa trên phân trang.
 
-## Requirments
+## Requirements
 
 - **Định thời:** Triển khai bộ định thời dựa trên Multi-Level Queue (MLQ).
 - **Quản lý bộ nhớ:** Triển khai hệ thống con phân trang và focus vào module TLB.
