@@ -40,7 +40,7 @@
   - **Scheduling:** Vẽ sơ đồ Gantt mô tả cách CPU thực hiện các process.
   - **Memory:** Hiển thị trạng thái của trang được ánh xạ và trang chỉ mục liên quan đến thủ tục TLB và cách xử lý trường hợp xảy ra lỗi trang.
   - **Overall:** Sinh viên tự tim cách diễn giải kết quả mô phỏng.
-- Báo cáo chi tiết được viêt [tại đây](https://www.overleaf.com/8987125341hrjmrbsddcfh#4ae898)
+- Báo cáo chi tiết được viết [tại đây](https://www.overleaf.com/8987125341hrjmrbsddcfh#4ae898).
 
 ## Grading
 - Code (7 điểm)
