@@ -45,6 +45,6 @@
 ## Grading
 - Code (7 điểm)
   - Scheduling: 3 điểm
-  - CPU MMU (phân trang và ánh xạ trực tiếp TLB đơn giản): 1.5 điểm
+  - CPU MMU (phân trang và ánh xạ trực tiếp TLB đơn giản): 2.5 điểm
   - Đầy đủ các operation CPU TLB: 1.5 điểm
 - Báo cáo (3 điểm)
