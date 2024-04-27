@@ -1,4 +1,3 @@
-
 #include "queue.h"
 #include "sched.h"
 #include <pthread.h>
@@ -11,6 +10,8 @@ static pthread_mutex_t queue_lock;
 
 #ifdef MLQ_SCHED
 static struct queue_t mlq_ready_queue[MAX_PRIO];
+static int current_prio = 0;
+static int slotLeft = MAX_PRIO;
 #endif
 
 int queue_empty(void) {
@@ -47,7 +48,19 @@ struct pcb_t * get_mlq_proc(void) {
 	/*TODO: get a process from PRIORITY [ready_queue].
 	 * Remember to use lock to protect the queue.
 	 */
-	proc = dequeue(&mlq_ready_queue[0]);
+	pthread_mutex_lock(&queue_lock);
+	for (int i = 0; i < MAX_PRIO; i++) {
+		if (slotLeft == 0 || empty(&mlq_ready_queue[current_prio])) {
+			current_prio = (current_prio + 1) % MAX_PRIO;
+			slotLeft = MAX_PRIO - current_prio;
+		}
+		else {
+			proc = dequeue(&mlq_ready_queue[current_prio]);
+			slotLeft--;
+			break;
+		}
+	}
+	pthread_mutex_unlock(&queue_lock);
 	return proc;	
 }
 
@@ -80,6 +93,7 @@ struct pcb_t * get_proc(void) {
 	/*TODO: get a process from [ready_queue].
 	 * Remember to use lock to protect the queue.
 	 * */
+	proc = dequeue(&ready_queue);
 	return proc;
 }
 
@@ -95,5 +109,3 @@ void add_proc(struct pcb_t * proc) {
 	pthread_mutex_unlock(&queue_lock);	
 }
 #endif
-
-
