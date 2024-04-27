@@ -41,6 +41,7 @@
   - **Memory:** Hiển thị trạng thái của trang được ánh xạ và trang chỉ mục liên quan đến thủ tục TLB và cách xử lý trường hợp xảy ra lỗi trang.
   - **Overall:** Sinh viên tự tim cách diễn giải kết quả mô phỏng.
 - Báo cáo chi tiết được viết [tại đây](https://www.overleaf.com/8987125341hrjmrbsddcfh#4ae898).
+- Tổng quan lý thuyết có thểm tham khảo tại [sOS Assignment](https://www.notion.so/sOS-Assignments-bb7aad483b8d4343a08822ccba79e58a).
 
 ## Grading
 - Code (7 điểm)
