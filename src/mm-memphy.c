@@ -5,7 +5,9 @@
  */
 
 #include "mm.h"
+#include <stdio.h>
 #include <stdlib.h>
+
 
 /*
  *  MEMPHY_mv_csr - move MEMPHY cursor
@@ -92,6 +94,7 @@ int MEMPHY_seq_write(struct memphy_struct * mp, int addr, BYTE value)
  *  @addr: address
  *  @data: written data
  */
+
 int MEMPHY_write(struct memphy_struct * mp, int addr, BYTE data)
 {
    if (mp == NULL)
@@ -154,16 +157,22 @@ int MEMPHY_get_freefp(struct memphy_struct *mp, int *retfpn)
 
    return 0;
 }
-
+/**************************************************************************************/
 int MEMPHY_dump(struct memphy_struct * mp)
 {
     /*TODO dump memphy contnt mp->storage 
      *     for tracing the memory content
      */
-
-    return 0;
+     printf("================Memory Dump=================\n");
+   for (int i = 0; i < mp->maxsz; i++){
+      if (mp->storage[i] != 0)
+         printf("Index %d: %d\n", i, mp->storage[i]);
+   }
+   printf("================End dump==================\n");
+   printf("================================================================\n");
+   return 0;
 }
-
+/**************************************************************************************/
 int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn)
 {
    struct framephy_struct *fp = mp->free_fp_list;
@@ -181,6 +190,7 @@ int MEMPHY_put_freefp(struct memphy_struct *mp, int fpn)
 /*
  *  Init MEMPHY struct
  */
+
 int init_memphy(struct memphy_struct *mp, int max_size, int randomflg)
 {
    mp->storage = (BYTE *)malloc(max_size*sizeof(BYTE));
