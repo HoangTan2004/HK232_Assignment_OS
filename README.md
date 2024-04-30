@@ -45,7 +45,7 @@
 ## References
 **LƯU Ý: KHÔNG ĐƯỢC LEAK CHO BẤT KỲ AI, NẾU PHÁT HIỆN THÌ ĐỪNG CÓ MÀ TRÁCH :)))**
 - Tổng quan lý thuyết có thể tham khảo tại [sOS Assignment](https://www.notion.so/sOS-Assignments-bb7aad483b8d4343a08822ccba79e58a).
-- Source code của chị Kiều Ngân và của anh Khang được up ở phía trên.
+- Source code của chị Kiều Ngân, anh Khang và anh Duy được up ở phía trên.
 
 ## Grading
 - Code (7 điểm)
