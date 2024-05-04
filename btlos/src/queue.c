@@ -2,12 +2,6 @@
 #include <stdlib.h>
 #include "queue.h"
 
-/*
- * @brief:	check if the queue is empty
- * @para:	pointer the queue
- * @retval:	1   -   empty 
- *          0   -   not empty
- * */
 int empty(struct queue_t *q)
 {
     if (q == NULL)
@@ -18,63 +12,44 @@ int empty(struct queue_t *q)
 void enqueue(struct queue_t *q, struct pcb_t *proc)
 {
     /* TODO: put a new process to queue [q] */
-    if (q->size >= MAX_QUEUE_SIZE)
-        return;
+    // Find the correct position to insert the new process based on its priority
+    for (int i = 0; i < q->size; ++i)
+    {
+        if (q->proc[i]->priority <= proc->priority) // If find the position for new process in queue
+        {
+            // Shift all the equal or lower priority processes to the right of the queue
+            for (int j = q->size - 1; j >= i; --j)
+            {
+                q->proc[j + 1] = q->proc[j];
+            }
+            // Insert the new process at the correct position
+            q->proc[i] = proc;
+            q->size++;
+            return;
+        }
+    }
+
+    // If end of the loop
+    // Put the new process at the end of the queue
+    q->proc[q->size] = proc;
     q->size++;
-    q->proc[q->size - 1] = proc;
 }
-
 
 struct pcb_t *dequeue(struct queue_t *q)
 {
-    /* TODO: return a pcb whose prioprity is the highest
+    /* TODO: return a pcb whose priority is the highest
      * in the queue [q] and remember to remove it from q
-     * */
-    struct pcb_t *ret_proc = NULL;
-    if (empty(q)) return ret_proc;
-        #ifdef MLQ_SCHED
-        ret_proc = q->proc[0];
-        for (int i = 0; i < q->size - 1; i++)
-        {
-            q->proc[i] = q->proc[i + 1];
-        }
-        q->proc[q->size - 1] = NULL;
-        q->size--;
-    return ret_proc;
-}
-#else
-struct pcb_t *dequeue(struct queue_t *q)
-{
-    /* TODO: return a pcb whose prioprity is the highest
-     * in the queue [q] and remember to remove it from q
-     * */
-    int highestPriority = MAX_PRIO * 2;
-    int ind = -1;
+     */
+    if (empty(q))
+        return NULL; // Return NULL if the queue is empty
 
-    for (int i = 0; i < q->size; i++)
-    {
-        // If priority is same choose
-        // the element with the
-        // highest value
-        if (highestPriority > q->proc[i]->priority)
-        {
-            highestPriority = q->proc[i]->priority;
-            ind = i;
-        }
-    }
+    struct pcb_t *head = q->proc[0]; // Get the head of the queue
 
-    if (ind == -1)
-        return NULL;
-    else
-    {
-        struct pcb_t *ret_proc = q->proc[ind];
-        for (int i = ind; i < q->size - 1; i++)
-        {
-            q->proc[i] = q->proc[i + 1];
-        }
-        q->size--;
-        return ret_proc;
-    }
-    return NULL;
+    // Shift all the remained processes to the left
+    for (int i = 0; i < (q->size - 1); i++)
+        q->proc[i] = q->proc[i + 1];
+
+    q->proc[q->size - 1] = NULL; // Assign NULL value for the tail of the queue
+    q->size--;                   // Decrese the size of the queue
+    return head;                 // Return the head of the queue
 }
-#endif

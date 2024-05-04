@@ -136,10 +136,9 @@ static void * ld_routine(void * args) {
 			   ld_processes.path[i], proc->pid, ld_processes.prio[i]);
 
 #else
-
-		printf("\tLoaded a process at %s, PID: %d PRIO: %d\n",
-
-			   ld_processes.path[i], proc->pid, proc->priority);
+		printf("\tLoaded a process at %s, PID: %d\n",
+			   ld_processes.path[i], proc->pid);
+			   //da xoa proc->priority
 
 #endif // MLQ_SCHED
 		add_proc(proc);

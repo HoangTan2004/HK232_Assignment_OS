@@ -59,6 +59,7 @@ int run(struct pcb_t * proc) {
 		stat = calc(proc);
 		break;
 	case ALLOC:
+		printf("Allocating...\n");
 #ifdef CPU_TLB 
 		stat = tlballoc(proc, ins.arg_0, ins.arg_1);
 #elif defined(MM_PAGING)
@@ -68,6 +69,7 @@ int run(struct pcb_t * proc) {
 #endif
 		break;
 	case FREE:
+		printf("Freeing...\n");
 #ifdef CPU_TLB
 		stat = tlbfree_data(proc, ins.arg_0);
 #elif defined(MM_PAGING)
@@ -77,6 +79,7 @@ int run(struct pcb_t * proc) {
 #endif
 		break;
 	case READ:
+		printf("Reading...\n");
 #ifdef CPU_TLB
 		stat = tlbread(proc, ins.arg_0, ins.arg_1, ins.arg_2);
 #elif defined(MM_PAGING)
@@ -86,6 +89,7 @@ int run(struct pcb_t * proc) {
 #endif
 		break;
 	case WRITE:
+		printf("Writing...\n");
 #ifdef CPU_TLB
 		stat = tlbwrite(proc, ins.arg_0, ins.arg_1, ins.arg_2);
 #elif defined(MM_PAGING)

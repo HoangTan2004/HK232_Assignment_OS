@@ -91,13 +91,30 @@ void add_proc(struct pcb_t * proc) {
 	return add_mlq_proc(proc);
 }
 #else
-struct pcb_t * get_proc(void) {
-	struct pcb_t * proc = NULL;
-	/*TODO: get a process from [ready_queue].
+struct pcb_t *get_proc(void)
+
+{
+	struct pcb_t *proc = NULL;
+	/* TODO: get a process from [ready_queue].
 	 * Remember to use lock to protect the queue.
 	 * */
-	proc = dequeue(&ready_queue);
+	pthread_mutex_lock(&queue_lock); // Acquire the lock to protect access to the queue
+	if (empty(&ready_queue)) // Check if the ready queue is empty
+	{
+		// If the ready queue is empty, move all processes from the run queue to the ready queue
+		while (!empty(&run_queue))
+		{
+			proc = dequeue(&run_queue);	 // Dequeue a process from the run queue
+			enqueue(&ready_queue, proc); // Enqueue the process into the ready queue
+		}
+	}
+	if (!empty(&ready_queue))
+	{
+		proc = dequeue(&ready_queue); // Dequeue the next process from the ready queue
+	}
+	pthread_mutex_unlock(&queue_lock); // Release the lock after queue operations
 	return proc;
+
 }
 
 void put_proc(struct pcb_t * proc) {
