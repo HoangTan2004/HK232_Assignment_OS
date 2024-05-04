@@ -44,7 +44,7 @@
 
 ## References
 **LƯU Ý: KHÔNG ĐƯỢC LEAK CHO BẤT KỲ AI, NẾU PHÁT HIỆN THÌ ĐỪNG CÓ MÀ TRÁCH :)))**
-- Tổng quan lý thuyết có thể tham khảo tại [sOS Assignment](https://www.notion.so/sOS-Assignments-bb7aad483b8d4343a08822ccba79e58a).
+- Tổng quan lý thuyết có thể tham khảo tại [sOS Assignment](https://www.overleaf.com/project/66214d12d5a24ec010bd9a23).
 - Source code của chị Kiều Ngân, anh Khang, anh Duy và bạn của anh Duy được up ở phía trên.
 
 ## Grading
