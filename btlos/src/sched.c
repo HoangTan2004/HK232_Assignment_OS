@@ -50,7 +50,7 @@ struct pcb_t * get_mlq_proc(void) {
 	 * Remember to use lock to protect the queue.
 	 * */
 	pthread_mutex_lock(&queue_lock);
-	curr_prio = 0;
+	if(slot_left == 0) curr_prio = 0;
 	for (int i = 0; i < MAX_PRIO; i++) {
         if (slot_left == 0 || empty(&mlq_ready_queue[curr_prio])) {
             curr_prio = (curr_prio + 1) % MAX_PRIO;
