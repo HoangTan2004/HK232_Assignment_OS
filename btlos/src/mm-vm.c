@@ -202,14 +202,13 @@ int pgfree_data(struct pcb_t *proc, uint32_t reg_index)
 int pg_getpage(struct mm_struct *mm, int pgn, int *fpn, struct pcb_t *caller)
 {
   uint32_t pte = mm->pgd[pgn];
-  printf("-------------------------pte = %X\n", pte);
+  //printf("-------------------------pte = %X\n", pte);
   if (!PAGING_PAGE_PRESENT(pte))
   { /* Page is not online, make it actively living */
   printf("-----------------------swapping----------------------------------\n");
     int vicpgn, swpfpn; 
-     int vicfpn;
-     uint32_t vicpte;
-
+    int vicfpn;
+    uint32_t vicpte;
     int tgtfpn = PAGING_SWP(pte);//the target frame storing our variable
 
     /* TODO: Play with your paging theory here */
