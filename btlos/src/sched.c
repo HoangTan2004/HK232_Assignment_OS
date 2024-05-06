@@ -98,21 +98,12 @@ struct pcb_t *get_proc(void)
 	/* TODO: get a process from [ready_queue].
 	 * Remember to use lock to protect the queue.
 	 * */
-	pthread_mutex_lock(&queue_lock); // Acquire the lock to protect access to the queue
-	if (empty(&ready_queue)) // Check if the ready queue is empty
-	{
-		// If the ready queue is empty, move all processes from the run queue to the ready queue
-		while (!empty(&run_queue))
-		{
-			proc = dequeue(&run_queue);	 // Dequeue a process from the run queue
-			enqueue(&ready_queue, proc); // Enqueue the process into the ready queue
-		}
-	}
+	pthread_mutex_lock(&queue_lock);
 	if (!empty(&ready_queue))
 	{
-		proc = dequeue(&ready_queue); // Dequeue the next process from the ready queue
+		proc = dequeue(&ready_queue);
 	}
-	pthread_mutex_unlock(&queue_lock); // Release the lock after queue operations
+	pthread_mutex_unlock(&queue_lock);
 	return proc;
 
 }

@@ -13,24 +13,7 @@ void enqueue(struct queue_t *q, struct pcb_t *proc)
 {
     /* TODO: put a new process to queue [q] */
     // Find the correct position to insert the new process based on its priority
-    for (int i = 0; i < q->size; ++i)
-    {
-        if (q->proc[i]->priority <= proc->priority) // If find the position for new process in queue
-        {
-            // Shift all the equal or lower priority processes to the right of the queue
-            for (int j = q->size - 1; j >= i; --j)
-            {
-                q->proc[j + 1] = q->proc[j];
-            }
-            // Insert the new process at the correct position
-            q->proc[i] = proc;
-            q->size++;
-            return;
-        }
-    }
-
-    // If end of the loop
-    // Put the new process at the end of the queue
+    if (proc == NULL || q == NULL || q->size == MAX_QUEUE_SIZE) return;
     q->proc[q->size] = proc;
     q->size++;
 }

@@ -36,9 +36,9 @@ struct mmpaging_ld_args {
 static struct ld_args{
 	char ** path;
 	unsigned long * start_time;
-#ifdef MLQ_SCHED
+//#ifdef MLQ_SCHED
 	unsigned long * prio;
-#endif
+//#endif
 } ld_processes;
 int num_processes;
 
@@ -136,8 +136,8 @@ static void * ld_routine(void * args) {
 			   ld_processes.path[i], proc->pid, ld_processes.prio[i]);
 
 #else
-		printf("\tLoaded a process at %s, PID: %d\n",
-			   ld_processes.path[i], proc->pid);
+		printf("\tLoaded a process at %s, PID: %d PRIO: %ld\n",
+			   ld_processes.path[i], proc->pid, ld_processes.prio[i]);
 			   //da xoa proc->priority
 
 #endif // MLQ_SCHED
@@ -204,21 +204,21 @@ static void read_config(const char * path) {
 #endif
 #endif
 
-#ifdef MLQ_SCHED
+//#ifdef MLQ_SCHED
 	ld_processes.prio = (unsigned long*)
 		malloc(sizeof(unsigned long) * num_processes);
-#endif
+//#endif
 	int i;
 	for (i = 0; i < num_processes; i++) {
 		ld_processes.path[i] = (char*)malloc(sizeof(char) * 100);
 		ld_processes.path[i][0] = '\0';
 		strcat(ld_processes.path[i], "input/proc/");
 		char proc[100];
-#ifdef MLQ_SCHED
+//#ifdef MLQ_SCHED
 		fscanf(file, "%lu %s %lu\n", &ld_processes.start_time[i], proc, &ld_processes.prio[i]);
-#else
-		fscanf(file, "%lu %s\n", &ld_processes.start_time[i], proc);
-#endif
+//#else
+		//fscanf(file, "%lu %s\n", &ld_processes.start_time[i], proc);
+//#endif
 		strcat(ld_processes.path[i], proc);
 	}
 }

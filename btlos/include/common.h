@@ -70,11 +70,11 @@ struct pcb_t {
 	struct code_seg_t * code;	// Code segment
 	addr_t regs[10]; // Registers, store address of allocated regions
 	uint32_t pc; // Program pointer, point to the next instruction
-#ifdef MLQ_SCHED
+//#ifdef MLQ_SCHED
 	// Priority on execution (if supported), on-fly aka. changeable
 	// and this vale overwrites the default priority when it existed
 	uint32_t prio;     
-#endif
+//#endif
 // #ifdef CPU_TLB
 // 	struct memphy_struct *tlb;
 // #endif
