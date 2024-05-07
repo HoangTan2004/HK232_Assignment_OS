@@ -11,8 +11,8 @@ static pthread_mutex_t queue_lock;
 
 #ifdef MLQ_SCHED
 static struct queue_t mlq_ready_queue[MAX_PRIO];
-static int current_prio = 0;
-static int slotLeft = MAX_PRIO;
+static int curr_prio = 0;
+static int slot_left = MAX_PRIO;
 #endif
 
 int queue_empty(void) {
@@ -27,7 +27,7 @@ int queue_empty(void) {
 
 void init_scheduler(void) {
 #ifdef MLQ_SCHED
-	int i ;
+    int i;
 
 	for (i = 0; i < MAX_PRIO; i ++)
 		mlq_ready_queue[i].size = 0;
@@ -48,21 +48,27 @@ struct pcb_t * get_mlq_proc(void) {
 	struct pcb_t * proc = NULL;
 	/*TODO: get a process from PRIORITY [ready_queue].
 	 * Remember to use lock to protect the queue.
-	 */
+	 * */
 	pthread_mutex_lock(&queue_lock);
-	for (int i = 0; i < MAX_PRIO; i++) {
-		if (slotLeft == 0 || empty(&mlq_ready_queue[current_prio])) {
-			current_prio = (current_prio + 1) % MAX_PRIO;
-			slotLeft = MAX_PRIO - current_prio;
-		}
-		else {
-			proc = dequeue(&mlq_ready_queue[current_prio]);
-			slotLeft--;
-			break;
-		}
+	if(slot_left == 0 || empty(&mlq_ready_queue[curr_prio])) {
+		curr_prio = 0;
+		slot_left = MAX_PRIO - curr_prio;
 	}
+	for (int i = 0; i < MAX_PRIO; i++) {
+        if (slot_left == 0 || empty(&mlq_ready_queue[curr_prio])) {
+			//if(curr_prio < 10) printf("ready queue prio %d empty\n", curr_prio);
+            curr_prio = (curr_prio + 1) % MAX_PRIO;
+            slot_left = MAX_PRIO - curr_prio;
+        }
+        else {
+		    proc = dequeue(&mlq_ready_queue[curr_prio]);
+            slot_left--;
+            break;
+        }
+	}
+    
 	pthread_mutex_unlock(&queue_lock);
-	return proc;	
+	return proc;
 }
 
 void put_mlq_proc(struct pcb_t * proc) {
@@ -86,25 +92,30 @@ void put_proc(struct pcb_t * proc) {
 }
 
 void add_proc(struct pcb_t * proc) {
+	//printf("vao add proc\n");
 	return add_mlq_proc(proc);
 }
 #else
-struct pcb_t * get_proc(void) {
-	struct pcb_t * proc = NULL;
-	/*TODO: get a process from [ready_queue].
+struct pcb_t *get_proc(void)
+
+{
+	struct pcb_t *proc = NULL;
+	/* TODO: get a process from [ready_queue].
 	 * Remember to use lock to protect the queue.
 	 * */
 	pthread_mutex_lock(&queue_lock);
-	if (!empty(&ready_queue)) {
+	if (!empty(&ready_queue))
+	{
 		proc = dequeue(&ready_queue);
 	}
 	pthread_mutex_unlock(&queue_lock);
 	return proc;
+
 }
 
 void put_proc(struct pcb_t * proc) {
 	pthread_mutex_lock(&queue_lock);
-	enqueue(&run_queue, proc);
+	enqueue(&ready_queue, proc);
 	pthread_mutex_unlock(&queue_lock);
 }
 
@@ -114,3 +125,5 @@ void add_proc(struct pcb_t * proc) {
 	pthread_mutex_unlock(&queue_lock);	
 }
 #endif
+
+
