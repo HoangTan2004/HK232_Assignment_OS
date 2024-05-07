@@ -13,11 +13,12 @@
 static int time_slot;
 static int num_cpus;
 static int done = 0;
+//static pthread_mutex_t mem_lock;
 
 #ifdef CPU_TLB
 static int tlbsz;
 #endif
-
+pthread_mutex_t mem_lock;
 #ifdef MM_PAGING
 static int memramsz;
 static int memswpsz[PAGING_MAX_MMSWP];
@@ -35,9 +36,9 @@ struct mmpaging_ld_args {
 static struct ld_args{
 	char ** path;
 	unsigned long * start_time;
-#ifdef MLQ_SCHED
+//#ifdef MLQ_SCHED
 	unsigned long * prio;
-#endif
+//#endif
 } ld_processes;
 int num_processes;
 
@@ -129,8 +130,27 @@ static void * ld_routine(void * args) {
 		proc->mswp = mswp;
 		proc->active_mswp = active_mswp;
 #endif
+#ifdef MLQ_SCHED
+#ifdef FCFS
 		printf("\tLoaded a process at %s, PID: %d PRIO: %ld\n",
-			ld_processes.path[i], proc->pid, ld_processes.prio[i]);
+
+			   ld_processes.path[i], proc->pid, ld_processes.prio[i]);
+#else
+		printf("\tLoaded a process at %s, PID: %d PRIO: %ld, PROC PRIORITY: %d\n",
+
+			   ld_processes.path[i], proc->pid, ld_processes.prio[i], proc->priority);
+#endif
+#else
+	#ifdef FCFS
+		printf("\tLoaded a process at %s, PID: %d\n",
+
+			   ld_processes.path[i], proc->pid);
+#else
+		printf("\tLoaded a process at %s, PID: %d PROC PRIORITY: %d\n",
+
+			   ld_processes.path[i], proc->pid, proc->priority);
+#endif
+#endif
 		add_proc(proc);
 		free(ld_processes.path[i]);
 		i++;
@@ -154,6 +174,7 @@ static void read_config(const char * path) {
 	ld_processes.start_time = (unsigned long*)
 		malloc(sizeof(unsigned long) * num_processes);
 
+
 #ifdef CPU_TLB
 #ifdef CPUTLB_FIXED_TLBSZ
 	/* We provide here a back compatible with legacy OS simulatiom config file
@@ -168,7 +189,6 @@ static void read_config(const char * path) {
 	fscanf(file, "%d\n", &tlbsz);
 #endif
 #endif
-
 #ifdef MM_PAGING
 	int sit;
 #ifdef MM_FIXED_MEMSZ
@@ -186,18 +206,18 @@ static void read_config(const char * path) {
 	 * Format: (size=0 result non-used memswap, must have RAM and at least 1 SWAP)
 	 *        MEM_RAM_SZ MEM_SWP0_SZ MEM_SWP1_SZ MEM_SWP2_SZ MEM_SWP3_SZ
 	*/
-	fscanf(file, "%d\n", &memramsz);
+	 fscanf(file, "%d\n", &memramsz);
 	for(sit = 0; sit < PAGING_MAX_MMSWP; sit++)
-		fscanf(file, "%d", &(memswpsz[sit])); 
+	fscanf(file, "%d", &(memswpsz[sit])); 
 
 	fscanf(file, "\n"); /* Final character */
 #endif
 #endif
 
-#ifdef MLQ_SCHED
+//#ifdef MLQ_SCHED
 	ld_processes.prio = (unsigned long*)
 		malloc(sizeof(unsigned long) * num_processes);
-#endif
+//#endif
 	int i;
 	for (i = 0; i < num_processes; i++) {
 		ld_processes.path[i] = (char*)malloc(sizeof(char) * 100);
@@ -210,6 +230,7 @@ static void read_config(const char * path) {
 		fscanf(file, "%lu %s\n", &ld_processes.start_time[i], proc);
 #endif
 		strcat(ld_processes.path[i], proc);
+		printf("test: %s %s\n", proc, ld_processes.path[i]);
 	}
 }
 
@@ -259,7 +280,9 @@ int main(int argc, char * argv[]) {
 	int sit;
 	for(sit = 0; sit < PAGING_MAX_MMSWP; sit++)
 	       init_memphy(&mswp[sit], memswpsz[sit], rdmflag);
+	// Initialize the mutex
 
+	pthread_mutex_init(&mem_lock, NULL);
 	/* In Paging mode, it needs passing the system mem to each PCB through loader*/
 	struct mmpaging_ld_args *mm_ld_args = malloc(sizeof(struct mmpaging_ld_args));
 
