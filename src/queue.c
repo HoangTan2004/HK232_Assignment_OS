@@ -12,7 +12,7 @@ int empty(struct queue_t *q)
 void enqueue(struct queue_t *q, struct pcb_t *proc)
 {
     //printf("vao enqueue\n");
-    #ifdef FCFS
+    #ifdef RR
     if (q->size >= MAX_QUEUE_SIZE)
         return;
     q->size++;
