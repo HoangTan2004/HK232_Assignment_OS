@@ -119,6 +119,8 @@ static void * ld_routine(void * args) {
 		struct pcb_t * proc = load(ld_processes.path[i]);
 #ifdef MLQ_SCHED
 		proc->prio = ld_processes.prio[i];
+#else 
+		proc->prio =  proc->priority;
 #endif
 		while (current_time() < ld_processes.start_time[i]) {
 			next_slot(timer_id);
@@ -132,16 +134,13 @@ static void * ld_routine(void * args) {
 #endif
 #ifdef MLQ_SCHED
 		printf("\tLoaded a process at %s, PID: %d PRIO: %ld\n",
-
-			   ld_processes.path[i], proc->pid, ld_processes.prio[i]);
-
+		ld_processes.path[i], proc->pid, ld_processes.prio[i]);
 #else
-		printf("\tLoaded a process at %s, PID: %d PRIO: %ld\n",
-			   ld_processes.path[i], proc->pid, ld_processes.prio[i]);
-			   //da xoa proc->priority
-
-#endif // MLQ_SCHED
+		printf("\tLoaded a process at %s, PID: %d PROC PRIORITY: %d\n",
+		ld_processes.path[i], proc->pid, proc->priority);
+#endif
 		add_proc(proc);
+		printf("da add\n");
 		free(ld_processes.path[i]);
 		i++;
 		next_slot(timer_id);
@@ -214,12 +213,13 @@ static void read_config(const char * path) {
 		ld_processes.path[i][0] = '\0';
 		strcat(ld_processes.path[i], "input/proc/");
 		char proc[100];
-//#ifdef MLQ_SCHED
+#ifdef MLQ_SCHED
 		fscanf(file, "%lu %s %lu\n", &ld_processes.start_time[i], proc, &ld_processes.prio[i]);
-//#else
-		//fscanf(file, "%lu %s\n", &ld_processes.start_time[i], proc);
-//#endif
+#else
+		fscanf(file, "%lu %s\n", &ld_processes.start_time[i], proc);
+#endif
 		strcat(ld_processes.path[i], proc);
+		printf("test: %s %s\n", proc, ld_processes.path[i]);
 	}
 }
 
