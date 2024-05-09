@@ -3,7 +3,6 @@
 
 //#define MLQ_SCHED 1
 #define MAX_PRIO 140
-//#define FCFS 1
 //#define CPU_TLB
 //#define CPUTLB_FIXED_TLBSZ
 #define MM_PAGING 
