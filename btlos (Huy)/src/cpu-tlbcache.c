@@ -48,8 +48,10 @@ int tlb_cache_read(struct memphy_struct *mp, int pid, int pgnum, BYTE *data) {
             *data = -1;
             return -1;
         }
-        *data = PAGING_FPN(plb_pte);
-        return 0;
+       // *data = PAGING_FPN(plb_pte);
+       // return 0;
+       int frgnb = PAGING_FPN(plb_pte);
+         return frgnb; 
     }
     return -1;
 }
