@@ -42,11 +42,6 @@
   - **Overall:** Sinh viên tự tim cách diễn giải kết quả mô phỏng.
 - Báo cáo chi tiết được viết [tại đây](https://www.overleaf.com/project/66214d12d5a24ec010bd9a23).
 
-## References
-**LƯU Ý: KHÔNG ĐƯỢC LEAK CHO BẤT KỲ AI, NẾU PHÁT HIỆN THÌ ĐỪNG CÓ MÀ TRÁCH :)))**
-- Tổng quan lý thuyết có thể tham khảo tại [sOS Assignment](https://www.overleaf.com/project/66214d12d5a24ec010bd9a23).
-- Source code của chị Kiều Ngân, anh Khang, anh Duy và bạn của anh Duy được up ở phía trên.
-
 ## Grading
 - Code (7 điểm)
   - Scheduling: 3 điểm
